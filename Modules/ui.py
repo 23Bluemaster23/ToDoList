@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
 
         MainWindow.setFixedSize(751, 471)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('ToDoList.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('Resources/ToDoList.png'))
         
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         
