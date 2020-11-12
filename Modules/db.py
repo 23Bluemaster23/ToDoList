@@ -1,15 +1,8 @@
-from PyQt5 import QtGui
-
 import sqlite3,os
 
 path = 'DDBB'
-
-try:
+if os.path.isdir(path) != True:
 	os.mkdir(path)
-except OSError:
-	print ("Creation of the directory %s already exists" % path)
-else:
-	print ("Successfully created the directory %s " % path)
 
 taskCon = sqlite3.connect('DDBB/db.db')
 
@@ -36,7 +29,7 @@ def readData(Table):
 		
 		data = taskCur.execute('SELECT TASK FROM DOTASK')
 
-		DoHeader = ['Hacer']
+		
 
 		taskCon.commit()
 
@@ -48,8 +41,6 @@ def readData(Table):
 
 		data = taskCur.execute('SELECT TASK FROM DOINGTASK')
 
-		DoHeader = ['Haciendo']
-
 		taskCon.commit()
 
 		for value in data:
@@ -60,7 +51,7 @@ def readData(Table):
 
 		data = taskCur.execute('SELECT TASK FROM DIDTASK')
 
-		DoHeader = ['Hecho']
+		
 
 		taskCon.commit()
 
@@ -68,23 +59,7 @@ def readData(Table):
 
 			taskTable.append(value[0])
 
-
-	taskModel = QtGui.QStandardItemModel(len(taskTable),1)
-
-	taskModel.setHorizontalHeaderLabels(DoHeader)
-
-	id = 0
-
-	for row in range(len(taskTable)):
-
-		data = QtGui.QStandardItem(taskTable[id])
-
-		taskModel.setItem(row,data)
-
-		id +=1
-
-	return(taskModel)
-
+	return taskTable
 
 def createTask(text):
 	
